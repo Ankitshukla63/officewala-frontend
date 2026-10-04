@@ -1,0 +1,226 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * OFFICE WALA design system — Indian hand-painted truck-art meets corporate life.
+ * All colors are oklch semantic tokens. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  /* Office Wala palette */
+  --color-brick: var(--brick);
+  --color-mustard: var(--mustard);
+  --color-forest: var(--forest);
+  --color-tangerine: var(--tangerine);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+
+  --font-display: "Rozha One", ui-serif, Georgia, serif;
+  --font-sans: "Mukta", ui-sans-serif, system-ui, sans-serif;
+  --font-hand: "Caveat", ui-serif, cursive;
+}
+
+:root {
+  --radius: 0.75rem;
+
+  --paper: oklch(0.965 0.021 88);
+  --paper-deep: oklch(0.925 0.034 84);
+  --ink: oklch(0.26 0.035 52);
+  --brick: oklch(0.505 0.155 29);
+  --mustard: oklch(0.815 0.145 84);
+  --forest: oklch(0.43 0.085 152);
+  --tangerine: oklch(0.695 0.168 52);
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: oklch(0.985 0.014 90);
+  --card-foreground: var(--ink);
+  --popover: oklch(0.985 0.014 90);
+  --popover-foreground: var(--ink);
+  --primary: var(--brick);
+  --primary-foreground: oklch(0.98 0.015 90);
+  --secondary: var(--mustard);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-deep);
+  --muted-foreground: oklch(0.46 0.035 60);
+  --accent: var(--forest);
+  --accent-foreground: oklch(0.98 0.015 90);
+  --destructive: oklch(0.52 0.2 27);
+  --destructive-foreground: oklch(0.98 0.015 90);
+  --border: oklch(0.38 0.045 55);
+  --input: oklch(0.78 0.03 72);
+  --ring: var(--tangerine);
+
+  --shadow-paint: 4px 4px 0 var(--ink);
+  --shadow-paint-sm: 3px 3px 0 var(--ink);
+  --shadow-soft: 0 10px 24px -14px oklch(0.26 0.035 52 / 55%);
+}
+
+.dark {
+  --background: oklch(0.22 0.025 55);
+  --foreground: oklch(0.95 0.02 88);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    background-image:
+      radial-gradient(oklch(0.26 0.035 52 / 6%) 1px, transparent 1px),
+      radial-gradient(oklch(0.26 0.035 52 / 4%) 1px, transparent 1px);
+    background-size:
+      22px 22px,
+      13px 13px;
+    background-position:
+      0 0,
+      7px 9px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+  }
+}
+
+/* Hand-painted signboard panel */
+@utility paint-panel {
+  background-color: var(--color-card);
+  border: 3px solid var(--color-border);
+  border-radius: 18px 22px 20px 24px;
+  box-shadow: var(--shadow-paint);
+}
+
+@utility paint-panel-sm {
+  background-color: var(--color-card);
+  border: 2px solid var(--color-border);
+  border-radius: 14px 18px 15px 19px;
+  box-shadow: var(--shadow-paint-sm);
+}
+
+/* Ruled notebook paper */
+@utility notebook-paper {
+  background-color: oklch(0.985 0.014 92);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 27px,
+    oklch(0.6 0.06 240 / 28%) 28px
+  );
+  border: 2px solid var(--color-border);
+  border-radius: 6px 16px 16px 6px;
+  box-shadow: var(--shadow-paint-sm);
+}
+
+/* Old office document */
+@utility doc-paper {
+  background-color: oklch(0.955 0.028 86);
+  border: 2px solid var(--color-border);
+  border-radius: 4px;
+  box-shadow: var(--shadow-soft);
+}
+
+@utility sticker-label {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border: 2px solid var(--color-border);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@utility press-btn {
+  border: 3px solid var(--color-border);
+  box-shadow: var(--shadow-paint);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+@utility press-btn-active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--color-border);
+}
+
+@utility stamp-urgent {
+  border: 3px solid var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transform: rotate(-12deg);
+  border-radius: 6px;
+  padding: 0.1rem 0.5rem;
+  opacity: 0.85;
+}
+
+@keyframes page-turn-in {
+  from {
+    opacity: 0;
+    transform: perspective(1200px) rotateY(-28deg) translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1200px) rotateY(0deg) translateX(0);
+  }
+}
+
+@utility page-turn {
+  animation: page-turn-in 380ms ease-out both;
+  transform-origin: left center;
+}
+
+@keyframes marquee-slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility marquee-track {
+  display: inline-flex;
+  animation: marquee-slide 26s linear infinite;
+}

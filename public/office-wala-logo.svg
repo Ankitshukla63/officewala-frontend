@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Office Wala</title>
+  <rect x="5" y="5" width="118" height="118" rx="28" fill="#a33b2f" stroke="#49372b" stroke-width="8"/>
+  <path d="M38 48h49v37a17 17 0 0 1-17 17H55a17 17 0 0 1-17-17V48Z" fill="#f4d56c" stroke="#49372b" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M87 57h9a13 13 0 0 1 0 26h-9" fill="none" stroke="#49372b" stroke-width="7" stroke-linecap="round"/>
+  <path d="M49 38c-5-7 5-9 0-16m17 16c-5-7 5-9 0-16m17 16c-5-7 5-9 0-16" fill="none" stroke="#f4d56c" stroke-width="6" stroke-linecap="round"/>
+  <path d="M32 108h67" fill="none" stroke="#f4d56c" stroke-width="6" stroke-linecap="round"/>
+</svg>
