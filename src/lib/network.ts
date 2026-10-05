@@ -1,4 +1,13 @@
 export function getApiBaseUrl(): string {
+  const configuredBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim();
+  if (configuredBaseUrl) {
+    return configuredBaseUrl.replace(/\/+$/, "");
+  }
+
+  if (import.meta.env.PROD) {
+    return "https://papua-charming-adjacent-thousand.trycloudflare.com";
+  }
+
   if (typeof window === "undefined") {
     return "http://localhost:8080";
   }
