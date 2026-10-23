@@ -5,7 +5,7 @@ export function getApiBaseUrl(): string {
   }
 
   if (import.meta.env.PROD) {
-    return "https://papua-charming-adjacent-thousand.trycloudflare.com";
+    return "https://officewala-backend-ankit-aacuckbuc3fsb0fv.eastasia-01.azurewebsites.net";
   }
 
   if (typeof window === "undefined") {
