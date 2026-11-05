@@ -106,7 +106,7 @@ function Home() {
               >
                 <Icon className="size-7" />
                 <span className="font-display text-xl leading-tight">{tile.title}</span>
-                <span className="text-xs font-semibold opacity-85">{tile.blurb}</span>
+                <span className="text-xs font-semibold opacity-95">{tile.blurb}</span>
               </Link>
             );
           })}

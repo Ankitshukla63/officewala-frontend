@@ -35,6 +35,27 @@ function AuthPage() {
   const { user, loading } = useAuth();
 
   useEffect(() => {
+    let meta = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
+    let created = false;
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "robots";
+      document.head.appendChild(meta);
+      created = true;
+    }
+    const previous = meta.content;
+    meta.content = "noindex, follow";
+
+    return () => {
+      if (created && meta) {
+        meta.remove();
+      } else if (meta) {
+        meta.content = previous || "index, follow";
+      }
+    };
+  }, []);
+
+  useEffect(() => {
     if (search.mode) {
       setMode(search.mode);
     }

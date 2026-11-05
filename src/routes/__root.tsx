@@ -7,13 +7,16 @@ import {
   useNavigate,
   useLocation,
 } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { Menu } from "lucide-react";
 import { Toaster } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
 import { AuthWidget } from "@/components/office/AuthWidget";
-import { BossAlert } from "@/components/office/BossAlert";
 import { NAV_LINKS } from "@/lib/categories";
+
+const BossAlert = lazy(() =>
+  import("@/components/office/BossAlert").then((m) => ({ default: m.BossAlert }))
+);
 
 function NotFoundComponent() {
   return (
@@ -173,7 +176,7 @@ function SiteFooter() {
         <p className="mt-4 font-hand text-2xl text-mustard">
           "Kaam khatam nahi hua... bas laptop band kiya hai."
         </p>
-        <p className="mt-3 text-xs opacity-80">
+        <p className="mt-3 text-xs font-medium text-primary-foreground">
           © 2026 OFFICE WALA • Made for all the corporate warriors
         </p>
       </div>
@@ -218,7 +221,9 @@ function RootComponent() {
         <AuthGate />
       </main>
       <SiteFooter />
-      <BossAlert />
+      <Suspense fallback={null}>
+        <BossAlert />
+      </Suspense>
       <Toaster position="top-center" />
     </div>
   );

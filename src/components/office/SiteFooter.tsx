@@ -21,7 +21,7 @@ export function SiteFooter() {
         <p className="mt-4 font-hand text-2xl text-mustard">
           "Kaam khatam nahi hua... bas laptop band kiya hai."
         </p>
-        <p className="mt-3 text-xs opacity-80">
+        <p className="mt-3 text-xs font-medium text-primary-foreground">
           © 2026 OFFICE WALA • Made for all the corporate warriors
         </p>
       </div>

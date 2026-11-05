@@ -1,0 +1,15 @@
+# Office Wala
+
+> Office Wala is an Indian workplace satire and corporate entertainment platform ("Corporate Life FM"), collecting relatable clips, chai break moments, manager quotes, deadline notes, and Friday mood posts.
+
+## Pages
+
+- [Home](https://officewala-frontend.shuklaankit45470.workers.dev/): Daily curated office clips and navigation to workplace categories.
+- [Manager's Diary](https://officewala-frontend.shuklaankit45470.workers.dev/manager): Satirical quotes, requests, and diary moments from office managers.
+- [Meetings](https://officewala-frontend.shuklaankit45470.workers.dev/meetings): Relatable clips about meetings that could have been an email.
+- [Deadline](https://officewala-frontend.shuklaankit45470.workers.dev/deadline): Workplace deadline sticky notes, urgent tasks, and humorous excuses.
+- [Client Stories](https://officewala-frontend.shuklaankit45470.workers.dev/client): Encounters with unreasonable client requests and small changes.
+- [Chai Break](https://officewala-frontend.shuklaankit45470.workers.dev/chai): The sacred 5-minute chai break that becomes 45 minutes.
+- [Work From Home](https://officewala-frontend.shuklaankit45470.workers.dev/wfh): WFH status trackers, bedroom offices, and camera off excuses.
+- [Friday Mood](https://officewala-frontend.shuklaankit45470.workers.dev/friday): End-of-week celebrations and community photo wall.
+- [Random Clip Generator](https://officewala-frontend.shuklaankit45470.workers.dev/random): Roll the dice for a random corporate video clip.

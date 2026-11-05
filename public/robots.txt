@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /auth
+Disallow: /api/
+
+Sitemap: https://officewala-frontend.shuklaankit45470.workers.dev/sitemap.xml
