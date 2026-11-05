@@ -9,7 +9,12 @@
     "preview": "vite preview",
     "postinstall": "npm run build",
     "predeploy": "npm run build",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "test:active-active": "node --experimental-strip-types tests/active-active.test.cjs",
+    "deploy:app-a": "wrangler deploy --config wrangler.app-a.jsonc",
+    "deploy:app-b": "wrangler deploy --config wrangler.app-b.jsonc",
+    "deploy:router": "wrangler deploy --config wrangler.router.jsonc",
+    "deploy:active-active": "npm run deploy:app-a && npm run deploy:app-b && npm run deploy:router"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
