@@ -99,6 +99,11 @@
     border-color: var(--color-border);
   }
 
+  input::-ms-reveal,
+  input::-ms-clear {
+    display: none;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -223,4 +228,20 @@
 @utility marquee-track {
   display: inline-flex;
   animation: marquee-slide 26s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .marquee-track {
+    animation: none !important;
+  }
 }

@@ -64,7 +64,7 @@ export const Route = createFileRoute("/manager")({
           category: "manager",
         });
         clearPending();
-        toast.success("Manager moment saved to diary 📓");
+        toast.success("Manager moment saved to diary.");
         await queryClient.invalidateQueries({ queryKey: ["videos"] });
       } catch (error) {
         console.error(error);
@@ -78,10 +78,10 @@ export const Route = createFileRoute("/manager")({
       <CategoryPage
         category="manager"
         heading="MANAGER'S DIARY"
-        subtitle="Things My Manager Said 😂"
+        subtitle="Things My Manager Said"
         variant="notebook"
         paged
-        emptyLabel="The diary is empty 😂"
+        emptyLabel="The diary is empty."
         extra={
           <>
             {pending && (
@@ -119,10 +119,10 @@ export const Route = createFileRoute("/manager")({
               category="manager"
               tone="mustard"
               buttonLabel="+ ADD MANAGER MOMENT"
-              dialogTitle="New Manager Moment 👨‍💼"
+              dialogTitle="New Manager Moment"
               dialogDescription="What did the manager say this time? Title is enough — video is optional."
-              submitLabel="SAVE TO DIARY 📓"
-              successMessage="Added to the manager diary 📓"
+              submitLabel="SAVE TO DIARY"
+              successMessage="Added to the manager diary"
               notesLabel="What the manager said"
               notesPlaceholder="Can we have a quick call? Need this by EOD..."
             />

@@ -19,6 +19,30 @@ export function getApiBaseUrl(): string {
   return `${protocol}://${isLocalhost ? "localhost" : hostname}:8080`;
 }
 
+export function buildSamePageUploadUrl(path?: string, token?: string | null): string {
+  if (typeof window === "undefined") {
+    return "http://localhost:5173";
+  }
+
+  const hostname = window.location.hostname;
+  const isLocalhost = ["localhost", "127.0.0.1", "::1"].includes(hostname);
+
+  // If accessed via localhost on PC, use computer's LAN IP so any phone on the same Wi-Fi can open it
+  const host =
+    isLocalhost && typeof __LAN_IP__ !== "undefined" && __LAN_IP__ !== "localhost"
+      ? `${__LAN_IP__}:${window.location.port || "5173"}`
+      : window.location.host;
+
+  const protocol = window.location.protocol;
+  const targetPath = path || window.location.pathname;
+  const url = new URL(targetPath, `${protocol}//${host}`);
+  url.searchParams.set("upload", "open");
+  if (token) {
+    url.searchParams.set("auth_token", token);
+  }
+  return url.toString();
+}
+
 export function buildWirelessUploadUrl(bucket = "videos", category = "chai") {
   if (typeof window === "undefined") {
     return `http://localhost:5173/wireless-upload?bucket=${encodeURIComponent(bucket)}&category=${encodeURIComponent(category)}`;

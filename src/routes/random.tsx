@@ -32,10 +32,10 @@ function RandomPage() {
     <div className="mx-auto w-full max-w-4xl px-4 py-10">
       <header className="mb-6 text-center">
         <h1 className="font-display text-4xl leading-tight sm:text-5xl">
-          🎲 CORPORATE REALITY GENERATOR
+          CORPORATE REALITY GENERATOR
         </h1>
         <p className="mt-2 font-hand text-2xl text-brick">
-          One button. Infinite office trauma. 😂
+          One button. Infinite office trauma.
         </p>
       </header>
 
@@ -59,7 +59,7 @@ function RandomPage() {
 
       {clip && !loading && (
         <div className="paint-panel-sm mb-4 p-4 text-center">
-          <p className="font-display text-xl">Today's Corporate Reality 😂</p>
+          <p className="font-display text-xl">Today's Corporate Reality</p>
           <p className="font-hand text-2xl text-brick">
             {CATEGORY_LABEL[clip.category] ?? clip.category}: "{clip.title}"
           </p>

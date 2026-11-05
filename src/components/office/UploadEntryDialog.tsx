@@ -1,11 +1,11 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Loader2, Smartphone, Copy } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import QRCode from "react-qr-code";
 import { useAuth } from "@/hooks/useAuth";
-import { buildWirelessUploadUrl } from "@/lib/network";
+import { buildSamePageUploadUrl } from "@/lib/network";
 import {
   Dialog,
   DialogContent,
@@ -64,19 +64,39 @@ export function UploadEntryDialog({
   onSubmit,
 }: Props) {
   const { user } = useAuth();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("upload") === "open" || params.get("upload") === "1";
+    }
+    return false;
+  });
   const [values, setValues] = useState<Record<string, string>>({});
   const [files, setFiles] = useState<Record<string, File | null>>({});
   const queryClient = useQueryClient();
   const hasVideoField = fields.some((field) => field.kind === "video");
-  const wirelessUploadUrl = useMemo(
-    () => buildWirelessUploadUrl("videos", wirelessCategory),
-    [wirelessCategory],
-  );
+
+  const token = typeof window !== "undefined" ? localStorage.getItem("ow_token") : null;
+  const qrUploadUrl = useMemo(() => {
+    const currentPath = typeof window !== "undefined" ? window.location.pathname : undefined;
+    return buildSamePageUploadUrl(currentPath, token);
+  }, [token]);
 
   const reset = () => {
     setValues({});
     setFiles({});
+  };
+
+  const cleanUploadParamFromUrl = () => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      if (params.has("upload")) {
+        params.delete("upload");
+        const cleanQuery = params.toString();
+        const cleanUrl = window.location.pathname + (cleanQuery ? `?${cleanQuery}` : "");
+        window.history.replaceState({}, "", cleanUrl);
+      }
+    }
   };
 
   const mutation = useMutation({
@@ -92,6 +112,7 @@ export function UploadEntryDialog({
       toast.success(successMessage);
       setOpen(false);
       reset();
+      cleanUploadParamFromUrl();
       await queryClient.invalidateQueries({ queryKey: [invalidateKey] });
     },
     onError: (error: Error) => toast.error(error.message || "Something went wrong"),
@@ -99,7 +120,7 @@ export function UploadEntryDialog({
 
   const handleCopyLink = async () => {
     try {
-      await navigator.clipboard.writeText(wirelessUploadUrl);
+      await navigator.clipboard.writeText(qrUploadUrl);
       toast.success("QR link copied");
     } catch {
       toast.error("Could not copy link");
@@ -113,7 +134,7 @@ export function UploadEntryDialog({
           to="/auth"
           className={`press-btn inline-block rounded-md px-5 py-2.5 font-semibold active:press-btn-active ${TONE[tone]}`}
         >
-          SIGN IN TO ADD 🔐
+          SIGN IN TO ADD
         </Link>
         <p className="mt-2 text-sm text-muted-foreground">
           Sign in karke apna content add karo — delete bhi sirf tum kar sakte ho.
@@ -128,7 +149,10 @@ export function UploadEntryDialog({
         open={open}
         onOpenChange={(next) => {
           setOpen(next);
-          if (!next) reset();
+          if (!next) {
+            reset();
+            cleanUploadParamFromUrl();
+          }
         }}
       >
         <DialogTrigger asChild>
@@ -156,22 +180,22 @@ export function UploadEntryDialog({
               <div className="rounded-xl border-2 border-dashed border-border bg-muted/40 p-3">
                 <div className="flex items-center gap-2">
                   <Smartphone className="size-4 text-brick" />
-                  <p className="text-sm font-semibold">Wireless upload from another phone</p>
+                  <p className="text-sm font-semibold">Upload from any phone</p>
                 </div>
                 <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <div className="rounded-lg bg-white p-2 shadow-sm">
-                    <QRCode value={wirelessUploadUrl} size={108} bgColor="#ffffff" fgColor="#1f2937" />
+                    <QRCode value={qrUploadUrl} size={112} bgColor="#ffffff" fgColor="#1f2937" />
                   </div>
                   <div className="flex-1 text-sm text-muted-foreground">
-                    <p>Open this QR on any phone on the same Wi‑Fi and upload directly.</p>
+                    <p>Open this QR on any phone to open this exact upload form directly on your phone.</p>
                     <div className="mt-2 flex flex-wrap items-center gap-2">
                       <a
-                        href={wirelessUploadUrl}
+                        href={qrUploadUrl}
                         target="_blank"
                         rel="noreferrer"
                         className="text-sm font-semibold text-brick underline underline-offset-2"
                       >
-                        Open upload page
+                        Open form page
                       </a>
                       <button
                         type="button"

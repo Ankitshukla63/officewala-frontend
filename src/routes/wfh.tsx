@@ -15,10 +15,10 @@ export const Route = createFileRoute("/wfh")({
   component: () => (
     <CategoryPage
       category="wfh"
-      heading="🏠 WORK FROM HOME"
-      subtitle="Everyone's dream. 😂"
+      heading="WORK FROM HOME"
+      subtitle="Everyone's dream."
       variant="cards"
-      emptyLabel="Employee unreachable 😂"
+      emptyLabel="Employee unreachable."
       extra={
         <>
           <div className="paint-panel mx-auto mb-6 grid max-w-3xl grid-cols-2 gap-3 p-4 sm:grid-cols-4">
@@ -35,10 +35,10 @@ export const Route = createFileRoute("/wfh")({
             category="wfh"
             tone="mustard"
             buttonLabel="+ ADD WFH MOMENT"
-            dialogTitle="New WFH Moment 🏠"
+            dialogTitle="New WFH Moment"
             dialogDescription="Photo, video, or just the story — all optional except the title."
-            submitLabel="SAVE MOMENT 🏠"
-            successMessage="WFH moment saved 🏠"
+            submitLabel="SAVE MOMENT"
+            successMessage="WFH moment saved"
             withPhoto
             notesLabel="Notes"
             notesPlaceholder="Camera was off because... reasons."

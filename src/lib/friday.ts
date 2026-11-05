@@ -3,8 +3,8 @@ import type { FridayPost } from './categories'
 
 export interface FridayPage { items: FridayPost[]; total: number; page: number; pageSize: number; pageCount: number }
 
-export async function listFridayPosts(page: number, pageSize = 12): Promise<FridayPage> {
-  const { data } = await api.get('/api/friday-posts', { params: { page, size: pageSize } })
+export async function listFridayPosts(page: number, pageSize = 12, signal?: AbortSignal): Promise<FridayPage> {
+  const { data } = await api.get('/api/friday-posts', { params: { page, size: pageSize }, signal })
   return {
     items: data.items.map(mapPost),
     total: data.total,

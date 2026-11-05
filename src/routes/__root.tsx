@@ -5,6 +5,7 @@ import {
   useRouter,
   useRouterState,
   useNavigate,
+  useLocation,
 } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
@@ -43,7 +44,7 @@ function ErrorComponent({ error, reset }: { error: unknown; reset: () => void })
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="paint-panel max-w-md p-8 text-center">
-        <h1 className="font-display text-2xl">Server ne mana kar diya 😅</h1>
+        <h1 className="font-display text-2xl">Server ne mana kar diya</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Something went wrong. Try again or head back home.
         </p>
@@ -71,6 +72,7 @@ function ErrorComponent({ error, reset }: { error: unknown; reset: () => void })
 
 function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
 
   return (
     <header className="border-b-3 border-border bg-mustard">
@@ -89,16 +91,22 @@ function SiteHeader() {
         </Link>
 
         <nav className="hidden flex-wrap items-center gap-1.5 lg:flex">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className="rounded-md border-2 border-border bg-card px-2.5 py-1 text-sm font-semibold text-ink transition-transform hover:-translate-y-0.5"
-              activeProps={{ className: "bg-brick text-primary-foreground" }}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive = location.pathname === link.to;
+            return (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`rounded-md border-2 border-border px-2.5 py-1 text-sm font-semibold transition-all hover:-translate-y-0.5 ${
+                  isActive
+                    ? "bg-brick text-primary-foreground shadow-sm hover:bg-brick hover:text-primary-foreground"
+                    : "bg-card text-ink hover:bg-mustard/60 hover:text-ink"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-2">
@@ -118,16 +126,23 @@ function SiteHeader() {
 
       {open && (
         <nav className="grid grid-cols-2 gap-2 border-t-2 border-border px-4 pb-4 pt-3 lg:hidden">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              onClick={() => setOpen(false)}
-              className="rounded-md border-2 border-border bg-card px-3 py-2 text-center text-sm font-semibold text-ink"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive = location.pathname === link.to;
+            return (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={() => setOpen(false)}
+                className={`rounded-md border-2 border-border px-3 py-2 text-center text-sm font-semibold transition-all ${
+                  isActive
+                    ? "bg-brick text-primary-foreground shadow-sm hover:bg-brick hover:text-primary-foreground"
+                    : "bg-card text-ink hover:bg-mustard/60 hover:text-ink"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           <div className="col-span-2 flex justify-center pt-1">
             <AuthWidget />
           </div>
@@ -141,8 +156,8 @@ function SiteFooter() {
   return (
     <footer className="mt-12 border-t-3 border-border bg-forest px-4 py-8 text-primary-foreground">
       <div className="mx-auto max-w-4xl text-center">
-        <p className="font-display text-3xl">☕ OFFICE WALA</p>
-        <p className="font-hand text-2xl text-mustard">Corporate Life, One Clip at a Time 😂</p>
+        <p className="font-display text-3xl">OFFICE WALA</p>
+        <p className="font-hand text-2xl text-mustard">Corporate Life, One Clip at a Time</p>
 
         <div className="mx-auto mt-5 max-w-xl border-y-2 border-mustard/60 py-3 text-sm font-semibold">
           <p className="flex flex-wrap justify-center gap-x-2 gap-y-1">
@@ -156,10 +171,10 @@ function SiteFooter() {
         </div>
 
         <p className="mt-4 font-hand text-2xl text-mustard">
-          "Kaam khatam nahi hua... bas laptop band kiya hai." 😎
+          "Kaam khatam nahi hua... bas laptop band kiya hai."
         </p>
         <p className="mt-3 text-xs opacity-80">
-          © 2026 OFFICE WALA • Made for all the corporate warriors 🫡
+          © 2026 OFFICE WALA • Made for all the corporate warriors
         </p>
       </div>
     </footer>
@@ -185,7 +200,7 @@ function AuthGate() {
   if (loading) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <p className="font-hand text-3xl text-brick">Chai bann rahi hai... ☕</p>
+        <p className="font-hand text-3xl text-brick">Chai bann rahi hai...</p>
       </div>
     );
   }

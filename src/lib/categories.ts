@@ -60,48 +60,60 @@ export const NAV_LINKS = [
 export const CATEGORY_TILES = [
   {
     to: "/manager",
-    emoji: "👨‍💼",
+    icon: "briefcase",
     title: "MANAGER",
     blurb: "Funny manager-related clips.",
     tone: "mustard",
   },
   {
     to: "/meetings",
-    emoji: "📓",
+    icon: "calendar",
     title: "MEETINGS",
     blurb: "Meeting-related clips.",
     tone: "forest",
   },
   {
     to: "/deadline",
-    emoji: "⏰",
+    icon: "clock",
     title: "DEADLINE",
     blurb: "Notes and deadline memes.",
     tone: "brick",
   },
   {
     to: "/client",
-    emoji: "💼",
+    icon: "building",
     title: "CLIENT",
     blurb: "Funny client-related clips.",
     tone: "tangerine",
   },
   {
     to: "/chai",
-    emoji: "☕",
+    icon: "coffee",
     title: "CHAI BREAK",
     blurb: "Office chai and gossip.",
     tone: "forest",
   },
-  { to: "/wfh", emoji: "🏠", title: "WFH", blurb: "Work-from-home clips.", tone: "mustard" },
+  {
+    to: "/wfh",
+    icon: "home",
+    title: "WFH",
+    blurb: "Work-from-home clips.",
+    tone: "mustard",
+  },
   {
     to: "/friday",
-    emoji: "🎉",
+    icon: "sparkles",
     title: "FRIDAY",
     blurb: "Friday moments and photos.",
     tone: "tangerine",
   },
-  { to: "/random", emoji: "🎲", title: "RANDOM", blurb: "Random corporate reality.", tone: "brick" },
+  {
+    to: "/random",
+    icon: "dices",
+    title: "RANDOM",
+    blurb: "Random corporate reality.",
+    tone: "brick",
+  },
 ] as const;
 
 export const TONE_CLASS: Record<string, string> = {

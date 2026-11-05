@@ -1,8 +1,8 @@
 import { api } from './api'
 import type { DeadlineNote } from './categories'
 
-export async function listDeadlineNotes(): Promise<DeadlineNote[]> {
-  const { data } = await api.get('/api/deadline-notes')
+export async function listDeadlineNotes(signal?: AbortSignal): Promise<DeadlineNote[]> {
+  const { data } = await api.get('/api/deadline-notes', { signal })
   return data.map(mapNote)
 }
 

@@ -18,7 +18,7 @@ export function DeleteButton({
   invalidateKey,
   label = "Delete",
   confirmText = "Delete this permanently?",
-  successMessage = "Deleted 🗑️",
+  successMessage = "Deleted",
   ownerId,
 }: Props) {
   const queryClient = useQueryClient();

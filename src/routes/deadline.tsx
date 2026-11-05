@@ -37,10 +37,10 @@ function DeadlinePage() {
 
       <UploadEntryDialog
         buttonLabel="+ ADD DEADLINE NOTE"
-        dialogTitle="New Deadline Note ⏰"
+        dialogTitle="New Deadline Note"
         dialogDescription="Pin another impossible timeline to the wall. Title is enough."
-        submitLabel="PIN TO WALL 📌"
-        successMessage="Deadline pinned to the wall 📌"
+        submitLabel="PIN TO WALL"
+        successMessage="Deadline pinned to the wall"
         fields={FIELDS}
         invalidateKey="deadline-notes"
         tone="brick"
@@ -56,7 +56,7 @@ function DeadlinePage() {
 
       {notes.length === 0 ? (
         <div className="paint-panel p-10 text-center">
-          <p className="font-display text-2xl">No files on the desk 😂</p>
+          <p className="font-display text-2xl">No files on the desk.</p>
           <p className="mt-1 text-muted-foreground">
             Enjoy the calm — the next deadline is typing.
           </p>
@@ -97,7 +97,7 @@ function DeadlinePage() {
                   invalidateKey="deadline-notes"
                   label={`Delete ${note.title}`}
                   confirmText={`Delete "${note.title}"? This cannot be undone.`}
-                  successMessage="Deadline slip torn up 🗑️"
+                  successMessage="Deadline slip torn up"
                   onDelete={() => deleteDeadlineNote(note.id)}
                 />
               </div>

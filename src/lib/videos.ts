@@ -1,9 +1,9 @@
 import { api } from './api'
 import type { Clip } from './categories'
 
-export async function listVideos(category?: string): Promise<Clip[]> {
+export async function listVideos(category?: string, signal?: AbortSignal): Promise<Clip[]> {
   const params = category ? { category } : {}
-  const { data } = await api.get('/api/videos', { params })
+  const { data } = await api.get('/api/videos', { params, signal })
   return data.map(mapVideo)
 }
 

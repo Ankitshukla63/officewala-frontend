@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Play } from "lucide-react";
 import { VideoPlayer } from "./VideoPlayer";
@@ -41,13 +41,18 @@ export function CategoryPage({
   const playable = clips.filter((clip) => Boolean(clip.video_url));
   const [playingId, setPlayingId] = useState<string | null>(null);
   const [page, setPage] = useState(0);
+  const [showAll, setShowAll] = useState(false);
+
+  useEffect(() => {
+    setShowAll(false);
+  }, [category]);
 
   const currentIndex = Math.max(
     0,
     playable.findIndex((c) => c.id === playingId),
   );
   const current: Clip | null = playable[currentIndex] ?? playable[0] ?? null;
-  const visible = paged ? clips.slice(page, page + 1) : clips;
+  const visible = paged ? clips.slice(page, page + 1) : showAll ? clips : clips.slice(0, 2);
   const step = (delta: number) => {
     if (playable.length === 0) return;
     const next = (currentIndex + delta + playable.length) % playable.length;
@@ -63,13 +68,13 @@ export function CategoryPage({
 
       {extra}
 
-      <div className="mb-8">
+      <div className="mb-6">
         <VideoPlayer clip={current} onPrev={() => step(-1)} onNext={() => step(1)} />
       </div>
 
       {clips.length === 0 ? (
         <div className="paint-panel p-10 text-center">
-          <p className="font-display text-2xl">{emptyLabel ?? "No office drama loaded yet 😂"}</p>
+          <p className="font-display text-2xl">{emptyLabel ?? "No office drama loaded yet."}</p>
           <p className="mt-1 text-muted-foreground">Nothing filed under this category yet.</p>
         </div>
       ) : (
@@ -113,6 +118,7 @@ export function CategoryPage({
                       src={clip.image_url}
                       alt={clip.title}
                       loading="lazy"
+                      decoding="async"
                       className="max-h-56 w-full rounded-md border-2 border-border object-cover"
                     />
                   )}
@@ -147,7 +153,7 @@ export function CategoryPage({
                         </button>
                       ) : (
                         <span className="text-xs font-semibold text-muted-foreground">
-                          Notes only 📝
+                          Notes only
                         </span>
                       )}
                       <DeleteButton
@@ -155,7 +161,7 @@ export function CategoryPage({
                         invalidateKey="videos"
                         label={`Delete ${clip.title}`}
                         confirmText={`Delete "${clip.title}"? This cannot be undone.`}
-                        successMessage="Deleted from the wall 🗑️"
+                        successMessage="Deleted from the wall"
                         onDelete={async () => {
                           await deleteVideo(clip.id);
                           if (playingId === clip.id) setPlayingId(null);
@@ -167,6 +173,18 @@ export function CategoryPage({
               );
             })}
           </div>
+
+          {!paged && clips.length > 2 && (
+            <div className="mt-8 text-center">
+              <button
+                type="button"
+                onClick={() => setShowAll(!showAll)}
+                className="press-btn inline-flex items-center gap-2 rounded-xl bg-mustard px-7 py-3 font-display text-lg text-ink transition-transform hover:-translate-y-0.5 active:press-btn-active"
+              >
+                {showAll ? "SHOW LESS ↑" : `VIEW MORE (${clips.length - 2} MORE) ↓`}
+              </button>
+            </div>
+          )}
 
           {paged && (
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">

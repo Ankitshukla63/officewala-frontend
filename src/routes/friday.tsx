@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
+import { Loader2, Sparkles } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -42,7 +42,7 @@ function FridayPage() {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8">
       <header className="mb-6 text-center">
-        <h1 className="font-display text-4xl leading-tight sm:text-6xl">🎉 IT'S FRIDAY!</h1>
+        <h1 className="font-display text-4xl leading-tight sm:text-6xl">IT'S FRIDAY!</h1>
         <p className="mt-2 font-hand text-2xl text-brick">Show us your Friday mood.</p>
       </header>
 
@@ -52,7 +52,7 @@ function FridayPage() {
 
       {data.items.length === 0 ? (
         <div className="paint-panel p-10 text-center">
-          <p className="font-display text-2xl">No Friday photos yet 😂</p>
+          <p className="font-display text-2xl">No Friday photos yet.</p>
           <p className="mt-1 text-muted-foreground">Be the first corporate warrior to post.</p>
         </div>
       ) : (
@@ -64,11 +64,12 @@ function FridayPage() {
                   src={post.image_url}
                   alt={post.caption ?? "Friday office photo"}
                   loading="lazy"
+                  decoding="async"
                   className="aspect-square w-full rounded-sm border-2 border-border object-cover"
                 />
               ) : (
-                <div className="flex aspect-square items-center justify-center rounded-sm bg-muted text-3xl">
-                  🎉
+                <div className="flex aspect-square items-center justify-center rounded-sm bg-muted text-muted-foreground">
+                  <Sparkles className="size-8" />
                 </div>
               )}
               <figcaption className="pt-2">
@@ -83,7 +84,7 @@ function FridayPage() {
                     invalidateKey="friday"
                     label="Delete this Friday photo"
                     confirmText="Delete this Friday photo? This cannot be undone."
-                    successMessage="Friday photo removed 🗑️"
+                    successMessage="Friday photo removed"
                     onDelete={() => deleteFridayPost(post.id)}
                   />
                 </div>
@@ -143,7 +144,7 @@ function AddFridayPhoto({ page }: { page: number }) {
       return createFridayPost({ image_url: ref, caption: caption.trim() || null });
     },
     onSuccess: async () => {
-      toast.success("Friday mood posted 🎉");
+      toast.success("Friday mood posted.");
       setOpen(false);
       setPhoto(null);
       setCaption("");
@@ -159,7 +160,7 @@ function AddFridayPhoto({ page }: { page: number }) {
           to="/auth"
           className="press-btn inline-block rounded-md bg-tangerine px-5 py-2.5 font-semibold text-ink active:press-btn-active"
         >
-          SIGN IN TO POST 🔐
+          SIGN IN TO POST
         </Link>
         <p className="mt-2 text-sm text-muted-foreground">
           Apni Friday photo post karne ke liye sign in karo.
@@ -180,7 +181,7 @@ function AddFridayPhoto({ page }: { page: number }) {
       </DialogTrigger>
       <DialogContent className="max-h-[90vh] overflow-auto border-3 border-border bg-card">
         <DialogHeader>
-          <DialogTitle className="font-display text-2xl">Your Friday Mood 🎉</DialogTitle>
+          <DialogTitle className="font-display text-2xl">Your Friday Mood</DialogTitle>
           <DialogDescription>
             {page > 1 ? "New posts appear on page 1." : "It appears in the feed right away."}
           </DialogDescription>
@@ -209,7 +210,7 @@ function AddFridayPhoto({ page }: { page: number }) {
               onChange={(e) => setCaption(e.target.value)}
               maxLength={300}
               className="rounded-md border-2 border-border bg-background px-3 py-2 font-normal"
-              placeholder="Finally Friday! 🎉"
+              placeholder="Finally Friday!"
             />
           </label>
           <button
@@ -218,7 +219,7 @@ function AddFridayPhoto({ page }: { page: number }) {
             className="press-btn mt-1 inline-flex items-center justify-center gap-2 rounded-md bg-forest px-4 py-2.5 font-semibold text-primary-foreground disabled:opacity-60"
           >
             {mutation.isPending && <Loader2 className="size-4 animate-spin" />}
-            POST FRIDAY MOOD 🎉
+            POST FRIDAY MOOD
           </button>
         </form>
       </DialogContent>

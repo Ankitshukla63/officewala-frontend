@@ -8,19 +8,19 @@ export const Route = createFileRoute("/chai")({
   component: () => (
     <CategoryPage
       category="chai"
-      heading="☕ CHAI BREAK"
-      subtitle="5 minutes break... somehow became 45 minutes. 😂"
+      heading="CHAI BREAK"
+      subtitle="5 minutes break... somehow became 45 minutes."
       variant="cards"
-      emptyLabel="Kettle is empty 😂"
+      emptyLabel="Kettle is empty."
       extra={
         <AddClipDialog
           category="chai"
           tone="brick"
           buttonLabel="+ ADD NEW CHAI BREAK"
-          dialogTitle="New Chai Break ☕"
+          dialogTitle="New Chai Break"
           dialogDescription="Upload your own office chai moment. It shows up instantly."
-          submitLabel="SAVE CHAI ☕"
-          successMessage="Chai saved ☕"
+          submitLabel="SAVE CHAI"
+          successMessage="Chai saved"
           notesLabel="Description"
           notesPlaceholder="What happened at the chai tapri?"
         />

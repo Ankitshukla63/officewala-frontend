@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { LogOut } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -15,6 +15,7 @@ export function AuthWidget() {
     return (
       <Link
         to="/auth"
+        search={{ mode: "signup" }}
         className="press-btn rounded-md bg-brick px-3 py-1.5 text-sm font-semibold text-primary-foreground"
       >
         Sign in
@@ -26,13 +27,16 @@ export function AuthWidget() {
     await queryClient.cancelQueries();
     queryClient.clear();
     signOut();
-    toast.success("Laptop band ✅");
-    navigate({ to: "/auth", replace: true });
+    toast.success("Laptop band. See you tomorrow!");
+    navigate({ to: "/auth", search: { mode: "signup" }, replace: true });
   };
 
   return (
     <div className="flex items-center gap-2">
-      <span className="sticker-label bg-forest text-primary-foreground">🫡 {displayName}</span>
+      <span className="sticker-label flex items-center gap-1.5 bg-forest text-primary-foreground">
+        <User className="size-3.5" />
+        {displayName}
+      </span>
       <button
         type="button"
         onClick={handleSignOut}

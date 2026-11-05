@@ -65,7 +65,7 @@ function WirelessUploadPage() {
     <div className="mx-auto max-w-xl px-4 py-10">
       <div className="paint-panel p-6 text-left">
         <p className="sticker-label bg-brick text-primary-foreground">WIRELESS UPLOAD</p>
-        <h1 className="mt-4 font-display text-4xl">Upload from another phone 📱</h1>
+        <h1 className="mt-4 font-display text-4xl">Upload from another phone</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Choose a video clip on your mobile, and it will be added to the Office Wala library.
         </p>

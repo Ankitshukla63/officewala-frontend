@@ -25,7 +25,7 @@ export function AddClipDialog({
   submitLabel,
   successMessage,
   extraFields = [],
-  withPhoto,
+  withPhoto = true,
   tone = "brick",
   notesLabel = "Notes",
   notesPlaceholder,
@@ -60,9 +60,11 @@ export function AddClipDialog({
         const thumbFile = files["thumbnail"] ?? null;
         const photoFile = files["photo"] ?? null;
 
-        const videoRef = videoFile ? await uploadToBucket("videos", videoFile) : null;
-        const thumbRef = thumbFile ? await uploadToBucket("thumbnails", thumbFile) : null;
-        const photoRef = photoFile ? await uploadToBucket("friday-photos", photoFile) : null;
+        const [videoRef, thumbRef, photoRef] = await Promise.all([
+          videoFile ? uploadToBucket("videos", videoFile) : Promise.resolve(null),
+          thumbFile ? uploadToBucket("thumbnails", thumbFile) : Promise.resolve(null),
+          photoFile ? uploadToBucket("friday-photos", photoFile) : Promise.resolve(null),
+        ]);
 
         return createVideo({
           title: values["title"]!.trim(),

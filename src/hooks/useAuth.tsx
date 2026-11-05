@@ -12,6 +12,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      const queryToken = params.get('auth_token')
+      if (queryToken) {
+        localStorage.setItem('ow_token', queryToken)
+        params.delete('auth_token')
+        const cleanQuery = params.toString()
+        const cleanUrl = window.location.pathname + (cleanQuery ? `?${cleanQuery}` : '')
+        window.history.replaceState({}, '', cleanUrl)
+      }
+    }
+
     const token = localStorage.getItem('ow_token')
     if (!token) {
       setLoading(false)

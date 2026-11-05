@@ -36,14 +36,14 @@ export function BossAlert() {
         }}
         className="press-btn fixed bottom-4 right-4 z-40 rounded-full bg-destructive px-4 py-2.5 text-sm font-bold tracking-wide text-destructive-foreground active:press-btn-active"
       >
-        🚨 BOSS IS COMING
+        BOSS IS COMING
       </button>
 
       {phase !== "idle" && (
         <div className="fixed inset-0 z-50 overflow-auto bg-background">
           {phase === "countdown" && (
             <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-destructive px-6 text-center text-destructive-foreground">
-              <p className="font-display text-4xl sm:text-6xl">⚠️ BOSS DETECTED</p>
+              <p className="font-display text-4xl sm:text-6xl"> BOSS DETECTED</p>
               <p className="text-lg font-semibold tracking-[0.3em]">ACT PROFESSIONAL.</p>
               <p className="font-display text-7xl">{count > 0 ? count : "…"}</p>
             </div>
@@ -54,7 +54,7 @@ export function BossAlert() {
           {phase === "gone" && (
             <div className="flex min-h-screen items-center justify-center bg-forest px-6 text-center">
               <p className="font-display text-4xl text-primary-foreground sm:text-6xl">
-                😎 Boss Gone
+                Boss Gone
               </p>
             </div>
           )}

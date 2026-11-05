@@ -1,0 +1,20 @@
+# Office Wala Cloudflare Edge Caching & Security Headers
+
+# Hashed immutable assets (Vite generated bundles, styles, converted images)
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff
+
+# Favicons, logo and root assets
+/office-wala-logo.svg
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+  X-Content-Type-Options: nosniff
+
+# Single Page App Entrypoint - Always validate for atomic zero-downtime updates
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
