@@ -13,3 +13,4 @@ export interface AppEnv {
   ENVIRONMENT?: string;
   BACKEND_API_URL?: string;
 }
+
